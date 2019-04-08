@@ -6,9 +6,21 @@ module.exports = {
 };
 
 function succeed(item) {
-  const enhanced =
-    item.enhancement < 20 ? (item.enhancement += 1) : (item.enhancement = 20);
-  return { ...item, enhancement: enhanced };
+  let { name, durability, enhancement } = item;
+  const enhanced = {
+    name: name,
+    durability: durability,
+    enhancement: enhancement
+  };
+
+  if (enhancement < 0) {
+    enhanced.enhancement = 0;
+  } else if (enhancement !== 0 && enhancement < 20) {
+    enhanced.enhancement += 1;
+  } else if (enhancement >= 20) {
+    enhanced.enhancement = 20;
+  }
+  return enhanced;
 }
 
 function fail(item) {
