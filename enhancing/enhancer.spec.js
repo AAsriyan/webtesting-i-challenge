@@ -58,4 +58,22 @@ describe("enhancement", () => {
       expect(enhancer.fail(itemDehance)).toEqual(failEnhance);
     });
   });
+  describe("Getting item", () => {
+    it("Should add an item enhancement in the name.", () => {
+      const getItem = {
+        name: "Sword",
+        durability: 80,
+        enhancement: Math.floor(Math.random() * 10)
+      };
+      const itemUpdated = {
+        name:
+          getItem.enhancement === 0
+            ? `${getItem.name}`
+            : `[+${getItem.enhancement}] ${getItem.name}`,
+        durability: getItem.durability,
+        enhancement: getItem.enhancement
+      };
+      expect(enhancer.get(getItem)).toEqual(itemUpdated);
+    });
+  });
 });
